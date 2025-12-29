@@ -1,0 +1,3 @@
+mutation VerifyAccount ($data:VerificationInput!) {
+    verifyAccount(data:$data)
+}
