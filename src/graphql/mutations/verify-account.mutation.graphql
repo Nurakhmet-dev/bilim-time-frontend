@@ -1,3 +1,5 @@
-mutation VerifyAccount ($data:VerificationInput!) {
-    verifyAccount(data:$data)
-}
+#mutation VerifyAccount ($data:VerificationInput!) {
+#    verifyAccount(data:$data){
+
+#    }
+#}

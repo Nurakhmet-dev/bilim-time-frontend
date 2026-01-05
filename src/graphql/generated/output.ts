@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-import * as ApolloReactHoc from '@apollo/client/react/hoc';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -86,7 +85,7 @@ export type Mutation = {
   updateAvatar: Scalars['Boolean']['output'];
   updateEmail: Scalars['Boolean']['output'];
   updatePassword: Scalars['Boolean']['output'];
-  verifyAccount: Scalars['Boolean']['output'];
+  verifyEmail: AuthModel;
 };
 
 
@@ -145,7 +144,7 @@ export type MutationUpdatePasswordArgs = {
 };
 
 
-export type MutationVerifyAccountArgs = {
+export type MutationVerifyEmailArgs = {
   data: VerificationInput;
 };
 
@@ -259,13 +258,6 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', register: boolean };
 
-export type VerifyAccountMutationVariables = Exact<{
-  data: VerificationInput;
-}>;
-
-
-export type VerifyAccountMutation = { __typename?: 'Mutation', verifyAccount: boolean };
-
 export type SubjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -284,19 +276,6 @@ export const LoginDocument = gql`
 }
     `;
 export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
-export type LoginProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: Apollo.MutationFunction<LoginMutation, LoginMutationVariables>
-    } & TChildProps;
-export function withLogin<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  LoginMutation,
-  LoginMutationVariables,
-  LoginProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps, TDataName>>(LoginDocument, {
-      alias: 'login',
-      ...operationOptions
-    });
-};
 
 /**
  * __useLoginMutation__
@@ -328,19 +307,6 @@ export const RegisterDocument = gql`
 }
     `;
 export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
-export type RegisterProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>
-    } & TChildProps;
-export function withRegister<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  RegisterMutation,
-  RegisterMutationVariables,
-  RegisterProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps, TDataName>>(RegisterDocument, {
-      alias: 'register',
-      ...operationOptions
-    });
-};
 
 /**
  * __useRegisterMutation__
@@ -366,50 +332,6 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
-export const VerifyAccountDocument = gql`
-    mutation VerifyAccount($data: VerificationInput!) {
-  verifyAccount(data: $data)
-}
-    `;
-export type VerifyAccountMutationFn = Apollo.MutationFunction<VerifyAccountMutation, VerifyAccountMutationVariables>;
-export type VerifyAccountProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: Apollo.MutationFunction<VerifyAccountMutation, VerifyAccountMutationVariables>
-    } & TChildProps;
-export function withVerifyAccount<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  VerifyAccountMutation,
-  VerifyAccountMutationVariables,
-  VerifyAccountProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, VerifyAccountMutation, VerifyAccountMutationVariables, VerifyAccountProps<TChildProps, TDataName>>(VerifyAccountDocument, {
-      alias: 'verifyAccount',
-      ...operationOptions
-    });
-};
-
-/**
- * __useVerifyAccountMutation__
- *
- * To run a mutation, you first call `useVerifyAccountMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useVerifyAccountMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [verifyAccountMutation, { data, loading, error }] = useVerifyAccountMutation({
- *   variables: {
- *      data: // value for 'data'
- *   },
- * });
- */
-export function useVerifyAccountMutation(baseOptions?: Apollo.MutationHookOptions<VerifyAccountMutation, VerifyAccountMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<VerifyAccountMutation, VerifyAccountMutationVariables>(VerifyAccountDocument, options);
-      }
-export type VerifyAccountMutationHookResult = ReturnType<typeof useVerifyAccountMutation>;
-export type VerifyAccountMutationResult = Apollo.MutationResult<VerifyAccountMutation>;
-export type VerifyAccountMutationOptions = Apollo.BaseMutationOptions<VerifyAccountMutation, VerifyAccountMutationVariables>;
 export const SubjectsDocument = gql`
     query Subjects {
   getSubjects {
@@ -418,19 +340,6 @@ export const SubjectsDocument = gql`
   }
 }
     `;
-export type SubjectsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<SubjectsQuery, SubjectsQueryVariables>
-    } & TChildProps;
-export function withSubjects<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  SubjectsQuery,
-  SubjectsQueryVariables,
-  SubjectsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, SubjectsQuery, SubjectsQueryVariables, SubjectsProps<TChildProps, TDataName>>(SubjectsDocument, {
-      alias: 'subjects',
-      ...operationOptions
-    });
-};
 
 /**
  * __useSubjectsQuery__

@@ -13,14 +13,7 @@ const config: CodegenConfig = {
 				'typescript',
 				'typescript-operations',
 				'typescript-react-apollo'
-			],
-			config: {
-				reactApolloVersion: 3,
-				withHOC: 'I',
-				//apolloClientVersion: 5,
-				//importOperationTypesFrom: 'Types',
-				//useTypeImports: true
-			}
+			]
 		}
 	},
 	ignoreNoDocuments: true

@@ -4,7 +4,7 @@ export const PUBLIC_URL = {
 	root: (url = '') => `${url ? url : ''}` as string,
 
 	home: () => PUBLIC_URL.root('/'),
-	auth: () => PUBLIC_URL.root('/auth'),
+	auth: (url: 'login' | 'register') => PUBLIC_URL.root(`/auth/${url}`),
 	courses: () => PUBLIC_URL.root('/courses'),
 
 	course: (slug = '') => PUBLIC_URL.root(`/course/${slug}`),

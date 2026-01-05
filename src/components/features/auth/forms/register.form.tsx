@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -25,11 +26,13 @@ import {
 
 import { AuthWrapper } from '../auth-wrapper'
 
-interface IRegisterFormProps {
-	setIsLogin: (value: false) => void
-}
+import { PUBLIC_URL } from '@/config/url.config'
 
-export const RegisterForm: FC<IRegisterFormProps> = ({ setIsLogin }) => {
+interface IRegisterFormProps {}
+
+const loginPage = PUBLIC_URL.auth('login')
+
+export const RegisterForm: FC<IRegisterFormProps> = () => {
 	const t = useTranslations('auth.register')
 
 	const form = useForm<TypeRegisterSchema>({
@@ -47,7 +50,7 @@ export const RegisterForm: FC<IRegisterFormProps> = ({ setIsLogin }) => {
 	const [create, { loading: isLoading }] = useRegisterMutation({
 		onCompleted() {
 			toast.success('Success login')
-            alert('email verify')
+			alert('email verify')
 		},
 		onError(err) {
 			toast.error('Error login')
@@ -62,7 +65,7 @@ export const RegisterForm: FC<IRegisterFormProps> = ({ setIsLogin }) => {
 		<AuthWrapper
 			heading={t('heading')}
 			backButtonLabel='Парақшаңыз барма? Кіру'
-			onClick={() => setIsLogin(true)}
+			onClick={() => redirect(loginPage)}
 		>
 			<Form {...form}>
 				<form
@@ -78,7 +81,7 @@ export const RegisterForm: FC<IRegisterFormProps> = ({ setIsLogin }) => {
 								<FormControl>
 									<Input
 										{...field}
-                                        type='text'
+										type='text'
 										placeholder={t('name.placeholder')}
 										disabled={isLoading}
 									/>
@@ -96,7 +99,7 @@ export const RegisterForm: FC<IRegisterFormProps> = ({ setIsLogin }) => {
 								<FormControl>
 									<Input
 										{...field}
-                                        type='tel'
+										type='tel'
 										placeholder={t('phone.placeholder')}
 										disabled={isLoading}
 									/>

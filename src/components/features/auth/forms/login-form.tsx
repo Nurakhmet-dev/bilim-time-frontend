@@ -1,6 +1,7 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { redirect } from 'next/navigation'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -22,11 +23,13 @@ import { loginSchema, TypeLoginSchema } from '@/schemas/auth/login.schema'
 
 import { AuthWrapper } from '../auth-wrapper'
 
-interface ILoginFormProps {
-	setIsLogin: (value: false) => void
-}
+import { PUBLIC_URL } from '@/config/url.config'
 
-export const LoginForm: FC<ILoginFormProps> = ({ setIsLogin }) => {
+interface ILoginFormProps {}
+
+const regiterPage = PUBLIC_URL.auth('register')
+
+export const LoginForm: FC<ILoginFormProps> = () => {
 	const t = useTranslations('auth.login')
 
 	const form = useForm<TypeLoginSchema>({
@@ -56,7 +59,7 @@ export const LoginForm: FC<ILoginFormProps> = ({ setIsLogin }) => {
 		<AuthWrapper
 			heading={t('heading')}
 			backButtonLabel='Парақшаңыз жоқ па? Тіркелу'
-			onClick={() => setIsLogin(false)}
+			onClick={() => redirect(regiterPage)}
 		>
 			<Form {...form}>
 				<form

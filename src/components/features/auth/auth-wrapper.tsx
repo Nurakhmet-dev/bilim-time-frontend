@@ -23,24 +23,18 @@ export function AuthWrapper({
 	backButtonLabel
 }: PropsWithChildren<IAuthWrapperProps>) {
 	return (
-		<div className='flex h-full items-center justify-center'>
-			<Card className='w-lg'>
-				<CardHeader className='flex flex-row items-center justify-center gap-x-4'>
-					<CardTitle>
-						<Heading lvl='h4'>{heading}</Heading>
-					</CardTitle>
-				</CardHeader>
-				<CardContent>{children}</CardContent>
-				<CardFooter className='mt-2'>
-					<Button
-						variant={'ghost'}
-						className='w-full'
-						onClick={onClick}
-					>
-						{backButtonLabel}
-					</Button>
-				</CardFooter>
-			</Card>
-		</div>
+		<Card className='w-lg'>
+			<CardHeader className='flex flex-row items-center justify-center gap-x-4'>
+				<CardTitle>
+					<h4 className='text-2xl'>{heading}</h4>
+				</CardTitle>
+			</CardHeader>
+			<CardContent>{children}</CardContent>
+			<CardFooter className='mt-2'>
+				<Button variant={'ghost'} className='w-full' onClick={onClick}>
+					{backButtonLabel}
+				</Button>
+			</CardFooter>
+		</Card>
 	)
 }
